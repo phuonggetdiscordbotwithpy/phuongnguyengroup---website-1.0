@@ -163,21 +163,21 @@
       <div class="product-box">Keychain EP Album</div>
       <div class="title">Lovely Mid - Autumn - Festival</div>
       <p>Item</p>
-      <a class="buy-btn" href="#">BUY</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Keychain Christmas</div>
       <div class="title">Christmas Is Coming ❄️</div>
       <p>Item</p>
-      <a class="buy-btn" href="#">BUY</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Keychain EP Album</div>
       <div class="title">Life Is Everything ❤️</div>
       <p>11/04/2026 📅</p>
-      <a class="buy-btn" href="#">BUY</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
   </div>
@@ -204,21 +204,21 @@
       <div class="product-box">Chilling Music</div>
       <div class="title">Chilling Music For Study</div>
       <p>Chill study music</p>
-      <a class="buy-btn" href="#">Watch</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Events</div>
       <div class="title">EVENTS PLAYLISTS 🎪</div>
       <p>Event playlist</p>
-      <a class="buy-btn" href="#">Watch</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Official MV</div>
       <div class="title">OFFICIAL MUSIC VIDEOS 🎬</div>
       <p>Official music videos</p>
-      <a class="buy-btn" href="#">Watch</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
   </div>
@@ -234,49 +234,49 @@
       <div class="product-box">macOS Service</div>
       <div class="title">macOS</div>
       <p>100k / 1 version</p>
-      <a class="buy-btn" href="#">BUY NOW</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Windows Service</div>
       <div class="title">Windows</div>
       <p>40k / 1 version</p>
-      <a class="buy-btn" href="#">BUY NOW</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Empty drive</div>
       <div class="title">Portable hard drive</div>
       <p>500k</p>
-      <a class="buy-btn" href="#">BUY NOW</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">OS combo</div>
       <div class="title">Installer drive - OS combo</div>
       <p>14 macOS + Windows 10 + Windows 11</p>
-      <a class="buy-btn" href="#">CONTACT</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">macOS pack</div>
       <div class="title">14 macOS versions</div>
       <p>1.760.000 VND - contact shop</p>
-      <a class="buy-btn" href="#">BUY NOW</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Full combo</div>
       <div class="title">14 macOS + Win10 + Win11</div>
       <p>1.800.000 VND - contact shop</p>
-      <a class="buy-btn" href="#">BUY NOW</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
     <div class="product-card">
       <div class="product-box">Custom</div>
       <div class="title">Custom build</div>
       <p>Choose macOS & Windows versions</p>
-      <a class="buy-btn" href="#">CONTACT</a>
+      <a class="buy-btn" href="https://www.facebook.com/messages/t/61571999066913/" target="_blank">BUY NOW</a>
     </div>
 
   </div>
@@ -288,35 +288,94 @@
   <h2>Community posts from Fans and Phuong Nguyen Group ✍️</h2>
 
   <div class="card">
-    <input placeholder="Name" style="width:100%;padding:10px">
-    <textarea placeholder="Content" style="width:100%;height:100px"></textarea>
+    <input id="nameInput" placeholder="Name" style="width:100%;padding:10px">
+    <textarea id="contentInput" placeholder="Content" style="width:100%;height:100px"></textarea>
     <button class="buy-btn" onclick="addPost()">Post</button>
   </div>
 
-  <div id="postList"></div>
+  <!-- Scrollable post container -->
+  <div id="postContainer" style="max-height:400px; overflow-y:auto; border:1px solid #000; border-radius:14px; padding:10px; background:#fffaf3;">
+    <div id="postList"></div>
+  </div>
+
 </div>
 
-<script>
-function loadPosts(){
-  let posts = JSON.parse(localStorage.getItem('posts')||'[]');
-  let html='';
-  posts.reverse().forEach(p=>{
-    html+=`<div class="card"><div class="title">${p.name}</div><p>${p.content}</p></div>`;
+<!-- FIREBASE + ADVANCED SYSTEM -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// 🔥 YOUR FIREBASE CONFIG (replace later)
+const firebaseConfig = { 
+  apiKey: "AIzaSyDH_fhclZxDpQ-uhD20Qazpj5X2r9ga5Is", 
+  authDomain: "my-website-62bef.firebaseapp.com", 
+  projectId: "my-website-62bef", 
+  storageBucket: "my-website-62bef.firebasestorage.app", 
+  messagingSenderId: "704403523591", 
+  appId: "1:704403523591:web:3bdab6f59c1dc8dda102a2" 
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// --- PROTECTION ---
+const RATE_LIMIT_MS = 5000;
+const MAX_LENGTH = 300;
+let lastPostTime = 0;
+
+function isSpam(content){
+  const banned = ["http://","https://","www.","spam","hack"];
+  return banned.some(w => content.toLowerCase().includes(w));
+}
+
+// --- LOAD POSTS REALTIME ---
+const q = query(collection(db, "posts"), orderBy("time", "desc"), limit(50));
+
+onSnapshot(q, (snapshot)=>{
+  let html = '';
+  snapshot.forEach(doc=>{
+    const p = doc.data();
+    html += `<div class="card"><div class="title">${p.name}</div><p>${p.content}</p></div>`;
   });
-  document.getElementById('postList').innerHTML=html;
-}
+  document.getElementById('postList').innerHTML = html;
+});
 
-function addPost(){
-  let name=document.querySelector('input').value;
-  let content=document.querySelector('textarea').value;
-  if(!name||!content)return;
-  let posts=JSON.parse(localStorage.getItem('posts')||'[]');
-  posts.push({name,content});
-  localStorage.setItem('posts',JSON.stringify(posts));
-  loadPosts();
-}
+// --- ADD POST ---
+window.addPost = async function(){
+  const now = Date.now();
 
-loadPosts();
+  if(now - lastPostTime < RATE_LIMIT_MS){
+    alert("⛔ Please wait!");
+    return;
+  }
+
+  let name = document.getElementById('nameInput').value.trim();
+  let content = document.getElementById('contentInput').value.trim();
+
+  if(!name || !content){
+    alert("⚠ Fill all fields!");
+    return;
+  }
+
+  if(content.length > MAX_LENGTH){
+    alert("⚠ Too long!");
+    return;
+  }
+
+  if(isSpam(content)){
+    alert("🚫 Spam detected!");
+    return;
+  }
+
+  await addDoc(collection(db, "posts"), {
+    name,
+    content,
+    time: Date.now()
+  });
+
+  document.getElementById('contentInput').value='';
+  lastPostTime = now;
+}
 </script>
 
 <footer>
@@ -325,7 +384,6 @@ loadPosts();
     <h2 style="font-size:13px; margin:5px 0;">Page created by Phuong Me Dev 🧋🦫</h2>
     <p style="margin:5px 0;">Email: ptnn.musicgroup@gmail.com</p>
     <p style="margin:5px 0;">Phone number: +84843340112</p>
-    <p style="margin:5px 0;">All the apps: Netlify - GitHub</p>
   </div>
 </footer>
 
