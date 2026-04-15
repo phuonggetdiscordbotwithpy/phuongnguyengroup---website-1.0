@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Phuong Nguyen Group</title>
+
+<style>
+  body{
+    margin:0;
+    font-family: Arial;
+    background:#f5e6d3;
+    color:#4a2f1b;
+  }
+
+  .navbar{
+    display:flex;
+    justify-content:space-between;
+    padding:15px 30px;
+    background:#d2b48c;
+    position:sticky;
+    top:0;
+  }
+
+  .navbar a{
+    color:#3b2414;
+    margin:0 10px;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+  }
+
+  .hero{
+    height:300px;
+    background: linear-gradient(135deg,#d2b48c,#c49a6c);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    flex-direction:column;
+    text-align:center;
+    font-size:40px;
+    font-weight:bold;
+    color:#3b2414;
+    text-shadow:0 0 10px rgba(255,255,255,0.4);
+  }
+
+  .section{
+    padding:30px;
+  }
+
+  .card{
+    background:#fffaf3;
+    padding:20px;
+    margin:15px 0;
+    border-radius:14px;
+    border:1px solid #e0c3a0;
+    box-shadow:0 5px 15px rgba(0,0,0,0.05);
+  }
+
+  .card:hover{
+    transform:translateY(-3px);
+    transition:0.2s;
+  }
+
+  .title{
+    font-size:22px;
+    margin-bottom:10px;
+    color:#5a3a22;
+  }
+
+  .post-date{
+    color:#8b6b4a;
+    font-size:12px;
+  }
+
+  a{
+    color:#8b5e34;
+    text-decoration:none;
+    font-weight:500;
+  }
+
+  a:hover{
+    color:#5a3a22;
+  }
+
+  footer{
+    padding:20px;
+    text-align:center;
+    background:#d2b48c;
+    color:#3b2414;
+    margin-top:40px;
+  }
+
+  .product-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:15px;
+    margin-top:15px;
+    justify-items:center;
+  }
+
+  .product-card{
+    background:#fffaf3;
+    border:1px solid #000;
+    border-radius:14px;
+    padding:15px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:100%;
+    max-width:260px;
+  }
+
+  .product-box{
+    width:100%;
+    aspect-ratio:1/1;
+    background:#f5e6d3;
+    border:1px solid #000;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:12px;
+    color:#4a2f1b;
+  }
+
+  .buy-btn{
+    display:inline-block;
+    padding:10px;
+    text-align:center;
+    background:#3b2414;
+    color:#fff;
+    border-radius:10px;
+    text-decoration:none;
+    font-weight:bold;
+  }
+
+  .buy-btn:hover{
+    background:#5a3a22;
+  }
+</style>
+
+</head>
+
+<body>
+
+<!-- NAV -->
+<div class="navbar">
+  <div><b>Phuong Nguyen Group 🦫</b></div>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  PHUONG NGUYEN GROUP 🦫🤎
+</div>
+
+<!-- MERCH -->
+<div class="section">
+  <h2>Phuong Thich Nghe Nhac - Merch 🛍️</h2>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-box">Keychain EP Album</div>
+      <div class="title">Lovely Mid - Autumn - Festival</div>
+      <p>Item</p>
+      <a class="buy-btn" href="#">BUY</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Keychain Christmas</div>
+      <div class="title">Christmas Is Coming ❄️</div>
+      <p>Item</p>
+      <a class="buy-btn" href="#">BUY</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Keychain EP Album</div>
+      <div class="title">Life Is Everything ❤️</div>
+      <p>11/04/2026 📅</p>
+      <a class="buy-btn" href="#">BUY</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- SPOTIFY -->
+<div class="section">
+  <h2>Spotify 🎧</h2>
+  <div class="card">
+    <iframe style="border-radius:12px"
+      src="https://open.spotify.com/embed/playlist/4e9bVogBdaJogm3gXXuaXT"
+      width="100%" height="352" frameborder="0"
+      allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+  </div>
+</div>
+
+<!-- PLAYLISTS -->
+<div class="section">
+  <h2>Official Playlists from YouTube 🎧</h2>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-box">Chilling Music</div>
+      <div class="title">Chilling Music For Study</div>
+      <p>Chill study music</p>
+      <a class="buy-btn" href="#">Watch</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Events</div>
+      <div class="title">EVENTS PLAYLISTS 🎪</div>
+      <p>Event playlist</p>
+      <a class="buy-btn" href="#">Watch</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Official MV</div>
+      <div class="title">OFFICIAL MUSIC VIDEOS 🎬</div>
+      <p>Official music videos</p>
+      <a class="buy-btn" href="#">Watch</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- COMPUTER STORE -->
+<div class="section">
+  <h2>Phuong Nguyen Computer Store 💻</h2>
+
+  <div class="product-grid">
+
+    <div class="product-card">
+      <div class="product-box">macOS Service</div>
+      <div class="title">macOS</div>
+      <p>100k / 1 version</p>
+      <a class="buy-btn" href="#">BUY NOW</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Windows Service</div>
+      <div class="title">Windows</div>
+      <p>40k / 1 version</p>
+      <a class="buy-btn" href="#">BUY NOW</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Empty drive</div>
+      <div class="title">Portable hard drive</div>
+      <p>500k</p>
+      <a class="buy-btn" href="#">BUY NOW</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">OS combo</div>
+      <div class="title">Installer drive - OS combo</div>
+      <p>14 macOS + Windows 10 + Windows 11</p>
+      <a class="buy-btn" href="#">CONTACT</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">macOS pack</div>
+      <div class="title">14 macOS versions</div>
+      <p>1.760.000 VND - contact shop</p>
+      <a class="buy-btn" href="#">BUY NOW</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Full combo</div>
+      <div class="title">14 macOS + Win10 + Win11</div>
+      <p>1.800.000 VND - contact shop</p>
+      <a class="buy-btn" href="#">BUY NOW</a>
+    </div>
+
+    <div class="product-card">
+      <div class="product-box">Custom</div>
+      <div class="title">Custom build</div>
+      <p>Choose macOS & Windows versions</p>
+      <a class="buy-btn" href="#">CONTACT</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- POSTS -->
+<div class="section">
+
+  <h2>Community posts from Fans and Phuong Nguyen Group ✍️</h2>
+
+  <div class="card">
+    <input placeholder="Name" style="width:100%;padding:10px">
+    <textarea placeholder="Content" style="width:100%;height:100px"></textarea>
+    <button class="buy-btn" onclick="addPost()">Post</button>
+  </div>
+
+  <div id="postList"></div>
+</div>
+
+<script>
+function loadPosts(){
+  let posts = JSON.parse(localStorage.getItem('posts')||'[]');
+  let html='';
+  posts.reverse().forEach(p=>{
+    html+=`<div class="card"><div class="title">${p.name}</div><p>${p.content}</p></div>`;
+  });
+  document.getElementById('postList').innerHTML=html;
+}
+
+function addPost(){
+  let name=document.querySelector('input').value;
+  let content=document.querySelector('textarea').value;
+  if(!name||!content)return;
+  let posts=JSON.parse(localStorage.getItem('posts')||'[]');
+  posts.push({name,content});
+  localStorage.setItem('posts',JSON.stringify(posts));
+  loadPosts();
+}
+
+loadPosts();
+</script>
+
+<footer>
+  <div style="font-size:12px; line-height:1.6;">
+    <h3 style="font-size:14px; margin:5px 0;">🦫 2026 Copyright by Phuong Nguyen Group - All rights reserved 🤎</h3>
+    <h2 style="font-size:13px; margin:5px 0;">Page created by Phuong Me Dev 🧋🦫</h2>
+    <p style="margin:5px 0;">Email: ptnn.musicgroup@gmail.com</p>
+    <p style="margin:5px 0;">Phone number: +84843340112</p>
+  </div>
+</footer>
+
+</body>
+</html>
