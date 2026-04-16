@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up | Phuong Nguyen Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3b2414;
+            --secondary: #d2b48c;
+            --accent: #8b5e34;
+            --bg-light: #f5e6d3;
+            --card-bg: #fffaf3;
+            --text-main: #4a2f1b;
+            --round-lg: 30px;
+            --shadow: 0 10px 40px rgba(59, 36, 20, 0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .signup-container {
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: var(--round-lg);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            border: 1px solid rgba(139, 94, 52, 0.1);
+        }
+
+        .signup-container h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.8rem;
+            color: var(--primary);
+            margin: 0 0 10px 0;
+        }
+
+        .signup-container p {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e0c3a0;
+            border-radius: 12px;
+            background: white;
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 94, 52, 0.1);
+        }
+
+        .btn-signup {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 15px;
+            text-transform: uppercase;
+        }
+
+        .btn-signup:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 36, 20, 0.2);
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.8rem;
+            margin-top: 12px;
+            min-height: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-link {
+            margin-top: 20px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .footer-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="signup-container">
+    <h1>Phuong Nguyen Group</h1>
+    <p>Create account - New member</p>
+
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email" class="input-field" placeholder="vi-du@gmail.com">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" class="input-field" placeholder="Tối thiểu 6 ký tự">
+    </div>
+
+    <div class="input-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" class="input-field" placeholder="Nhập lại mật khẩu">
+    </div>
+
+    <button class="btn-signup" id="signupBtn">Đăng ký thành viên</button>
+
+    <div id="errorMessage" class="error-msg"></div>
+
+    <div class="footer-link">
+        Đã có tài khoản? <a href="login.html">Đăng nhập</a>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    const firebaseConfig = { 
+        apiKey: "AIzaSyDH_fhclZxDpQ-uhD20Qazpj5X2r9ga5Is", 
+        authDomain: "my-website-62bef.firebaseapp.com", 
+        projectId: "my-website-62bef", 
+        storageBucket: "my-website-62bef.firebasestorage.app", 
+        messagingSenderId: "704403523591", 
+        appId: "1:704403523591:web:3bdab6f59c1dc8dda102a2" 
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const emailInput = document.getElementById('email');
+    const passInput = document.getElementById('password');
+    const confirmInput = document.getElementById('confirmPassword');
+    const signupBtn = document.getElementById('signupBtn');
+    const errorMsg = document.getElementById('errorMessage');
+
+    signupBtn.onclick = async () => {
+        const email = emailInput.value.trim();
+        const password = passInput.value.trim();
+        const confirm = confirmInput.value.trim();
+
+        // Kiểm tra đầu vào
+        if(!email || !password || !confirm) {
+            errorMsg.innerText = "Vui lòng không bỏ trống ô nào!";
+            return;
+        }
+
+        if(password !== confirm) {
+            errorMsg.innerText = "Mật khẩu xác nhận không khớp!";
+            return;
+        }
+
+        if(password.length < 6) {
+            errorMsg.innerText = "Mật khẩu phải từ 6 ký tự trở lên!";
+            return;
+        }
+
+        signupBtn.innerText = "Đang xử lý...";
+        signupBtn.disabled = true;
+
+        try {
+            await createUserWithEmailAndPassword(auth, email, password);
+            alert("Chúc mừng! Đăng ký thành công.");
+            window.location.href = "index.html"; 
+        } catch (error) {
+            signupBtn.innerText = "Đăng ký thành viên";
+            signupBtn.disabled = false;
+            
+            switch (error.code) {
+                case 'auth/email-already-in-use':
+                    errorMsg.innerText = "Email này đã được sử dụng rồi!";
+                    break;
+                case 'auth/invalid-email':
+                    errorMsg.innerText = "Email không hợp lệ!";
+                    break;
+                case 'auth/weak-password':
+                    errorMsg.innerText = "Mật khẩu quá yếu!";
+                    break;
+                default:
+                    errorMsg.innerText = "Lỗi: " + error.message;
+            }
+        }
+    };
+</script>
+
+</body>
+</html>

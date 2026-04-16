@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Phuong Nguyen Group</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #3b2414;
+            --secondary: #d2b48c;
+            --accent: #8b5e34;
+            --bg-light: #f5e6d3;
+            --card-bg: #fffaf3;
+            --text-main: #4a2f1b;
+            --round-lg: 30px;
+            --shadow: 0 10px 40px rgba(59, 36, 20, 0.15);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-light);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* --- LOGIN CARD --- */
+        .login-container {
+            background: var(--card-bg);
+            padding: 50px 40px;
+            border-radius: var(--round-lg);
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            border: 1px solid rgba(139, 94, 52, 0.1);
+        }
+
+        .login-container h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .login-container p {
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 30px;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- FORM --- */
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e0c3a0;
+            border-radius: 15px;
+            background: white;
+            font-family: inherit;
+            box-sizing: border-box;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .input-field:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(139, 94, 52, 0.1);
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 16px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-top: 10px;
+            text-transform: uppercase;
+        }
+
+        .btn-login:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(59, 36, 20, 0.2);
+        }
+
+        .error-msg {
+            color: #e74c3c;
+            font-size: 0.85rem;
+            margin-top: 15px;
+            min-height: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-link {
+            margin-top: 25px;
+            font-size: 0.85rem;
+            color: var(--accent);
+        }
+
+        .footer-link a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <h1>Phuong Nguyen</h1>
+    <p>Artist & Computer shop</p>
+
+    <div class="input-group">
+        <label>Email Address</label>
+        <input type="email" id="email" class="input-field" placeholder="your@email.com">
+    </div>
+
+    <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" class="input-field" placeholder="••••••••">
+    </div>
+
+    <button class="btn-login" id="loginBtn">Đăng nhập ngay</button>
+
+    <div id="errorMessage" class="error-msg"></div>
+
+    <div class="footer-link">
+        Quay lại <a href="index.html">Trang chủ</a>
+    </div>
+</div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
+    import { getAuth, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+    // --- FIREBASE CONFIG (Y chang web chính của bạn) ---
+    const firebaseConfig = { 
+        apiKey: "AIzaSyDH_fhclZxDpQ-uhD20Qazpj5X2r9ga5Is", 
+        authDomain: "my-website-62bef.firebaseapp.com", 
+        projectId: "my-website-62bef", 
+        storageBucket: "my-website-62bef.firebasestorage.app", 
+        messagingSenderId: "704403523591", 
+        appId: "1:704403523591:web:3bdab6f59c1dc8dda102a2" 
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const emailInput = document.getElementById('email');
+    const passInput = document.getElementById('password');
+    const loginBtn = document.getElementById('loginBtn');
+    const errorMsg = document.getElementById('errorMessage');
+
+    loginBtn.onclick = async () => {
+        const email = emailInput.value.trim();
+        const password = passInput.value.trim();
+
+        if(!email || !password) {
+            errorMsg.innerText = "Vui lòng nhập đầy đủ thông tin!";
+            return;
+        }
+
+        loginBtn.innerText = "Đang xác thực...";
+        loginBtn.disabled = true;
+
+        try {
+            await signInWithEmailAndPassword(auth, email, password);
+            // Sau khi đăng nhập thành công, chuyển hướng về trang chủ
+            window.location.href = "index.html"; 
+        } catch (error) {
+            loginBtn.innerText = "Đăng nhập ngay";
+            loginBtn.disabled = false;
+            
+            // Xử lý thông báo lỗi tiếng Việt cho thân thiện
+            switch (error.code) {
+                case 'auth/user-not-found':
+                    errorMsg.innerText = "Tài khoản không tồn tại!";
+                    break;
+                case 'auth/wrong-password':
+                    errorMsg.innerText = "Mật khẩu không chính xác!";
+                    break;
+                case 'auth/invalid-email':
+                    errorMsg.innerText = "Email không hợp lệ!";
+                    break;
+                default:
+                    errorMsg.innerText = "Lỗi: " + error.message;
+            }
+        }
+    };
+
+    // Hỗ trợ nhấn Enter để đăng nhập
+    [emailInput, passInput].forEach(input => {
+        input.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') loginBtn.click();
+        });
+    });
+</script>
+
+</body>
+</html>
