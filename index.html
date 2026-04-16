@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Phuong Nguyen Group | Official Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
         :root {
@@ -14,7 +14,10 @@
             --bg-light: #f5e6d3;
             --card-bg: #fffaf3;
             --text-main: #4a2f1b;
-            --transition: all 0.3s ease;
+            --round-lg: 30px; /* Bo tròn cực mạnh */
+            --round-md: 20px;
+            --shadow: 0 10px 40px rgba(59, 36, 20, 0.08);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         body {
@@ -25,32 +28,29 @@
             line-height: 1.6;
         }
 
-        /* --- NAVIGATION --- */
+        /* --- NAVBAR --- */
         .navbar {
             display: flex;
-            justify-content: space-between;
+            justify-content: center; /* Căn giữa logo */
             align-items: center;
-            padding: 15px 5%;
+            padding: 20px 5%;
             background: var(--secondary);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
         }
 
         .nav-logo {
-            font-size: 1.2rem;
-            font-weight: 700;
+            font-size: 1.5rem;
+            font-weight: 800;
             color: var(--primary);
             text-decoration: none;
+            cursor: pointer;
+            user-select: none;
         }
 
-        .auth-buttons {
-            display: flex;
-            gap: 10px;
-        }
-
-        /* --- HERO SECTION --- */
+        /* --- HERO --- */
         .hero {
             height: 400px;
             background: linear-gradient(135deg, #d2b48c, #c49a6c);
@@ -60,77 +60,92 @@
             flex-direction: column;
             text-align: center;
             color: var(--primary);
-            padding: 0 20px;
         }
 
         .hero h1 {
             font-family: 'Dancing Script', cursive;
-            font-size: 4rem;
+            font-size: 4.5rem;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(255,255,255,0.3);
         }
 
         /* --- LAYOUT --- */
         .section {
-            max-width: 1200px;
+            max-width: 1300px;
             margin: 0 auto;
-            padding: 50px 20px;
+            padding: 80px 20px;
         }
 
-        h2 {
-            border-left: 5px solid var(--primary);
-            padding-left: 15px;
-            margin-bottom: 30px;
+        .section h2 {
+            text-align: center; /* Tiêu đề căn giữa */
+            font-size: 2.2rem;
+            margin-bottom: 50px;
             color: var(--primary);
         }
 
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 25px;
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--accent);
+            margin: 15px auto;
+            border-radius: 10px;
         }
 
-        /* --- CARDS --- */
+        /* --- PRODUCT GRID (CĂN GIỮA & RỘNG RA) --- */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 40px;
+            justify-items: center; /* Căn giữa card trong ô lưới */
+        }
+
         .product-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: 20px;
-            border: 1px solid rgba(0,0,0,0.05);
+            border-radius: var(--round-lg);
+            padding: 40px;
+            border: 1px solid rgba(139, 94, 52, 0.1);
             transition: var(--transition);
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            align-items: center; /* Căn giữa mọi thứ bên trong card */
+            text-align: center;
+            width: 100%;
+            max-width: 380px;
+            box-shadow: var(--shadow);
         }
 
         .product-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(59, 36, 20, 0.15);
+            border-color: var(--accent);
         }
 
         .product-box {
             width: 100%;
-            aspect-ratio: 1/1;
-            background: #e9dcc9;
-            border-radius: 12px;
+            aspect-ratio: 16/9;
+            background: #eee1cf;
+            border-radius: var(--round-md);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 15px;
-            padding: 10px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            border: 2px dashed rgba(59, 36, 20, 0.1);
         }
 
+        /* --- BUTTONS --- */
         .btn {
             cursor: pointer;
-            padding: 12px 20px;
+            padding: 14px 40px;
             border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            text-align: center;
+            border-radius: 50px;
+            font-weight: 700;
             text-decoration: none;
             transition: var(--transition);
-            display: inline-block;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 80%; /* Nút dài ra cho đẹp */
         }
 
         .btn-primary {
@@ -140,47 +155,52 @@
 
         .btn-primary:hover {
             background: var(--accent);
-            opacity: 0.9;
+            transform: scale(1.05);
         }
 
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--primary);
-        }
-
-        /* --- COMMUNITY POSTS --- */
+        /* --- COMMUNITY --- */
         .post-form {
             background: var(--card-bg);
-            padding: 25px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            padding: 40px;
+            border-radius: var(--round-lg);
+            max-width: 700px;
+            margin: 0 auto 50px;
+            box-shadow: var(--shadow);
         }
 
         .input-field {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid #e0c3a0;
+            border-radius: var(--round-md);
+            background: white;
             font-family: inherit;
-            box-sizing: border-box;
         }
 
-        #postContainer {
-            max-height: 600px;
-            overflow-y: auto;
+        #postList {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
+            max-width: 700px;
+            margin: 0 auto;
         }
 
         .post-item {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            border-left: 4px solid var(--accent);
+            padding: 30px;
+            border-radius: var(--round-md);
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .delete-btn {
+            display: none; /* Ẩn mặc định, hiện khi là admin ẩn */
+            position: absolute;
+            top: 20px; right: 20px;
+            color: red;
+            cursor: pointer;
+            font-weight: bold;
         }
 
         footer {
@@ -190,13 +210,8 @@
             text-align: center;
         }
 
-        iframe {
-            border: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        }
-
         @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
+            .hero h1 { font-size: 3rem; }
             .product-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -204,74 +219,66 @@
 <body>
 
 <header class="navbar">
-    <a href="#" class="nav-logo">Phuong Nguyen Group 🦫</a>
-    <div class="auth-buttons" id="authSection">
-        <button class="btn btn-outline" onclick="loginGoogle()">Login</button>
-    </div>
+    <div class="nav-logo" id="logoLink">Phuong Nguyen Group 🦫</div>
 </header>
 
 <main>
     <section class="hero">
         <h1>Phuong Nguyen Group</h1>
-        <p>Music, Technology & Creativity</p>
+        <p>Creative Music & Technology Solutions</p>
     </section>
 
     <section class="section">
         <h2>Exclusive Merch 🛍️</h2>
         <div class="product-grid">
             <div class="product-card">
-                <div>
-                    <div class="product-box">Keychain EP Album</div>
-                    <h3>Lovely Mid-Autumn</h3>
-                </div>
-                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">BUY NOW</a>
+                <div class="product-box">Keychain EP Album</div>
+                <h3>Lovely Mid-Autumn</h3>
+                <p>Phiên bản giới hạn cho mùa Trung Thu.</p>
+                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">MUA NGAY</a>
             </div>
             
             <div class="product-card">
-                <div>
-                    <div class="product-box">Keychain Christmas</div>
-                    <h3>Christmas Is Coming ❄️</h3>
-                </div>
-                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">BUY NOW</a>
+                <div class="product-box">Keychain Christmas</div>
+                <h3>Christmas Special ❄️</h3>
+                <p>Món quà ấm áp cho mùa Giáng Sinh.</p>
+                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">MUA NGAY</a>
             </div>
 
             <div class="product-card">
-                <div>
-                    <div class="product-box">Keychain EP Album</div>
-                    <h3>Life Is Everything ❤️</h3>
-                </div>
-                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">BUY NOW</a>
+                <div class="product-box">Keychain EP Album</div>
+                <h3>Life Is Everything ❤️</h3>
+                <p>Merch chính thức của EP Life Is Everything.</p>
+                <a class="btn btn-primary" href="https://m.me/61571999066913" target="_blank">MUA NGAY</a>
             </div>
         </div>
     </section>
 
-    <section class="section" style="background: rgba(0,0,0,0.02);">
-        <h2>Spotify Artist 🎧</h2>
-        <iframe style="border-radius:12px" 
-            src="https://open.spotify.com/embed/artist/0?utm_source=generator&theme=0" 
-            width="100%" height="352" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
-    </section>
-
-    <section class="section">
+    <section class="section" style="background: rgba(139, 94, 52, 0.04);">
         <h2>Computer Services 💻</h2>
         <div class="product-grid">
             <div class="product-card">
-                <h3>Dịch vụ cài macOS</h3>
-                <p>Cài đặt chuyên nghiệp cho PC/Laptop (Hackintosh).</p>
-                <div class="price">100.000 VNĐ</div>
-                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">BOOK NOW</a>
+                <div class="product-box">macOS Installation</div>
+                <h3>Cài đặt macOS</h3>
+                <p>Hackintosh chuẩn cho PC/Laptop (Dell, HP, v.v.)</p>
+                <div style="font-weight: 700; margin-bottom: 20px; color: var(--accent);">100.000 VNĐ</div>
+                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">ĐẶT LỊCH</a>
             </div>
+            
             <div class="product-card">
-                <h3>Dịch vụ Windows</h3>
-                <p>Tối ưu hóa hệ thống, cài đặt Windows 10/11.</p>
-                <div class="price">40.000 VNĐ</div>
-                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">BOOK NOW</a>
+                <div class="product-box">Windows Service</div>
+                <h3>Cài đặt Windows</h3>
+                <p>Tối ưu hóa Windows 10/11 mượt mà nhất.</p>
+                <div style="font-weight: 700; margin-bottom: 20px; color: var(--accent);">40.000 VNĐ</div>
+                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">ĐẶT LỊCH</a>
             </div>
+
             <div class="product-card">
+                <div class="product-box">USB Installer</div>
                 <h3>Full OS Combo Drive</h3>
-                <p>USB Installer bao gồm 14 bản macOS + Windows.</p>
-                <div class="price">1.800.000 VNĐ</div>
-                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">BUY NOW</a>
+                <p>USB 14 bộ cài macOS + Cứu hộ Windows.</p>
+                <div style="font-weight: 700; margin-bottom: 20px; color: var(--accent);">1.800.000 VNĐ</div>
+                <a class="btn btn-primary" href="https://m.me/637525099437989" target="_blank">MUA NGAY</a>
             </div>
         </div>
     </section>
@@ -279,33 +286,25 @@
     <section class="section">
         <h2>Fan Community ✍️</h2>
         <div class="post-form">
-            <input id="nameInput" class="input-field" placeholder="Your Name">
-            <textarea id="contentInput" class="input-field" style="height:100px" placeholder="Share your thoughts..."></textarea>
-            <input type="file" id="imgInput" class="input-field" accept="image/*">
-            <button class="btn btn-primary" id="submitPostBtn">Share Post</button>
+            <input id="nameInput" class="input-field" placeholder="Tên của bạn">
+            <textarea id="contentInput" class="input-field" style="height:120px; resize: none;" placeholder="Bạn muốn chia sẻ điều gì?"></textarea>
+            <input type="file" id="imgInput" style="margin-bottom: 20px; display: block;">
+            <button class="btn btn-primary" style="width: auto;" id="submitPostBtn">Đăng bài</button>
         </div>
 
-        <div id="postContainer">
-            <div id="postList"></div>
-        </div>
+        <div id="postList">
+            </div>
     </section>
 </main>
 
 <footer>
-    <div class="footer-content">
-        <h3>© 2026 Phuong Nguyen Group</h3>
-        <p>Created by Phuong Me Dev 🧋</p>
-        <p>Email: ptnn.musicgroup@gmail.com | Phone: +84 843 340 112</p>
-        <div style="margin-top: 20px; font-size: 0.8rem; opacity: 0.7;">
-            GitHub • Netlify • Firebase
-        </div>
-    </div>
+    <p>© 2026 Phuong Nguyen Group | Created by Phuong Me Dev 🧋</p>
+    <p style="opacity: 0.7; font-size: 0.9rem;">ptnn.musicgroup@gmail.com | +84 843 340 112</p>
 </footer>
 
 <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
-    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, limit, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
-    import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, onSnapshot, query, orderBy, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
     import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
 
     const firebaseConfig = { 
@@ -319,81 +318,66 @@
 
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
-    const auth = getAuth(app);
     const storage = getStorage(app);
-    const provider = new GoogleAuthProvider();
 
-    const ADMIN_EMAIL = "ptnn.musicgroup@gmail.com";
-    let lastPostTime = 0;
-
-    // --- AUTH LOGIC ---
-    window.loginGoogle = async () => {
-        try { await signInWithPopup(auth, provider); } 
-        catch (e) { console.error(e); }
+    // --- ADMIN HACK (Nhấn logo 5 lần để hiện nút xóa) ---
+    let clickCount = 0;
+    let isAdmin = false;
+    document.getElementById('logoLink').onclick = () => {
+        clickCount++;
+        if(clickCount === 5) {
+            isAdmin = true;
+            alert("Admin Mode: Enabled! Bạn có thể xóa bài.");
+            renderPosts(); // Refresh lại danh sách để hiện nút xóa
+        }
     };
 
-    onAuthStateChanged(auth, (user) => {
-        const authSection = document.getElementById('authSection');
-        if(user) {
-            window.currentUser = user;
-            authSection.innerHTML = `<span style="margin-right:10px">Hi, ${user.displayName.split(' ')[0]}</span>
-                                    <button class="btn btn-outline" onclick="auth.signOut()">Logout</button>`;
-        }
-    });
+    // --- RENDER POSTS ---
+    const q = query(collection(db, "posts"), orderBy("time", "desc"));
+    let postsData = [];
 
-    // --- POSTS LOGIC ---
-    const q = query(collection(db, "posts"), orderBy("time", "desc"), limit(50));
-    
-    onSnapshot(q, (snapshot) => {
+    function renderPosts() {
         let html = '';
-        snapshot.forEach(docSnap => {
-            const p = docSnap.data();
-            const isAdmin = window.currentUser?.email === ADMIN_EMAIL;
+        postsData.forEach(p => {
             html += `
                 <div class="post-item">
-                    <div style="display:flex; justify-content:space-between">
-                        <strong style="color:var(--accent)">${p.name}</strong>
-                        ${isAdmin ? `<button onclick="deletePost('${docSnap.id}')" style="background:none; border:none; color:red; cursor:pointer">Delete</button>` : ''}
-                    </div>
+                    ${isAdmin ? `<span class="delete-btn" style="display:block" onclick="window.deletePost('${p.id}')">Xóa</span>` : ''}
+                    <strong style="color:var(--accent)">${p.name}</strong>
                     <p>${p.content}</p>
-                    ${p.image ? `<img src="${p.image}" style="width:100%; max-width:400px; border-radius:8px; margin-top:10px">` : ''}
+                    ${p.image ? `<img src="${p.image}" style="width:100%; border-radius:10px; margin-top:10px">` : ''}
                 </div>`;
         });
         document.getElementById('postList').innerHTML = html;
+    }
+
+    onSnapshot(q, (snapshot) => {
+        postsData = snapshot.docs.map(d => ({ id: d.id, ...d.data() }));
+        renderPosts();
     });
 
     window.deletePost = async (id) => {
-        if(confirm("Xóa bài viết này?")) await deleteDoc(doc(db, "posts", id));
+        if(confirm("Xóa bài này nhé?")) await deleteDoc(doc(db, "posts", id));
     };
 
+    // --- SUBMIT POST ---
     document.getElementById('submitPostBtn').onclick = async () => {
-        const now = Date.now();
-        if(now - lastPostTime < 5000) return alert("Chờ một chút nhé!");
-
         const name = document.getElementById('nameInput').value.trim();
         const content = document.getElementById('contentInput').value.trim();
         const file = document.getElementById('imgInput').files[0];
 
-        if(!name || !content) return alert("Vui lòng điền đủ thông tin!");
+        if(!name || !content) return alert("Nhập đủ tên và nội dung nha!");
 
         try {
             let imageUrl = "";
             if(file) {
-                const storageRef = ref(storage, `posts/${Date.now()}_${file.name}`);
-                const uploadTask = await uploadBytes(storageRef, file);
-                imageUrl = await getDownloadURL(uploadTask.ref);
+                const sRef = ref(storage, `posts/${Date.now()}_${file.name}`);
+                const task = await uploadBytes(sRef, file);
+                imageUrl = await getDownloadURL(task.ref);
             }
-
-            await addDoc(collection(db, "posts"), {
-                name, content, image: imageUrl, time: now
-            });
-
+            await addDoc(collection(db, "posts"), { name, content, image: imageUrl, time: Date.now() });
             document.getElementById('contentInput').value = '';
             document.getElementById('imgInput').value = '';
-            lastPostTime = now;
-        } catch (e) {
-            alert("Lỗi khi đăng bài!");
-        }
+        } catch (e) { alert("Lỗi rồi!"); }
     };
 </script>
 
