@@ -300,6 +300,7 @@
 
 </div>
 
+
 <!-- FIREBASE + ADVANCED SYSTEM -->
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js";
@@ -376,6 +377,124 @@ window.addPost = async function(){
   document.getElementById('contentInput').value='';
   lastPostTime = now;
 }
+// =====================
+// 🔐 GOOGLE LOGIN
+// =====================
+import { getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+window.loginGoogle = async function(){
+  await signInWithPopup(auth, provider);
+}
+
+onAuthStateChanged(auth, (user)=>{
+  if(user){
+    console.log("Logged in:", user.email);
+    window.currentUser = user;
+  }
+});
+
+// =====================
+// 🖼️ IMAGE UPLOAD (Firebase Storage)
+// =====================
+import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-storage.js";
+const storage = getStorage(app);
+
+async function uploadImage(file){
+  const storageRef = ref(storage, 'posts/' + Date.now() + file.name);
+  await uploadBytes(storageRef, file);
+  return await getDownloadURL(storageRef);
+}
+
+// =====================
+// 🧠 ADMIN SYSTEM
+// =====================
+const ADMIN_EMAIL = "ptnn.musicgroup@gmail.com";
+
+function isAdmin(){
+  return window.currentUser && window.currentUser.email === ADMIN_EMAIL;
+}
+
+// =====================
+// 🛒 ORDER SYSTEM
+// =====================
+import { addDoc as addOrder } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+window.orderProduct = async function(name){
+  await addOrder(collection(db, "orders"),{
+    product:name,
+    user: window.currentUser ? window.currentUser.email : "guest",
+    time: Date.now()
+  });
+  alert("✅ Order sent!");
+}
+
+// =====================
+// 📦 PRODUCT DB LOAD
+// =====================
+const productQuery = query(collection(db, "products"));
+onSnapshot(productQuery, (snapshot)=>{
+  console.log("Products synced");
+});
+
+// =====================
+// ✏️ EXTEND POST (IMAGE + ADMIN DELETE)
+// =====================
+window.addPost = async function(){
+  const now = Date.now();
+
+  if(now - lastPostTime < RATE_LIMIT_MS){
+    alert("⛔ Please wait!");
+    return;
+  }
+
+  let name = document.getElementById('nameInput').value.trim();
+  let content = document.getElementById('contentInput').value.trim();
+  let file = document.getElementById('imgInput')?.files[0];
+
+  if(!name || !content){
+    alert("⚠ Fill all fields!");
+    return;
+  }
+
+  let imageUrl = "";
+  if(file){
+    imageUrl = await uploadImage(file);
+  }
+
+  await addDoc(collection(db, "posts"), {
+    name,
+    content,
+    image: imageUrl,
+    time: Date.now()
+  });
+
+  document.getElementById('contentInput').value='';
+  lastPostTime = now;
+}
+
+// UPDATE RENDER WITH IMAGE + DELETE
+onSnapshot(q, (snapshot)=>{
+  let html = '';
+  snapshot.forEach(doc=>{
+    const p = doc.data();
+    html += `<div class="card">
+      <div class="title">${p.name}</div>
+      <p>${p.content}</p>
+      ${p.image ? `<img src="${p.image}" style="width:100%;border-radius:10px;margin-top:10px">` : ""}
+      ${isAdmin() ? `<button onclick="deletePost('${doc.id}')">🗑 Delete</button>` : ""}
+    </div>`;
+  });
+  document.getElementById('postList').innerHTML = html;
+});
+
+import { deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+window.deletePost = async function(id){
+  if(!isAdmin()) return alert("No permission");
+  await deleteDoc(doc(db, "posts", id));
+}
+
 </script>
 
 <footer>
